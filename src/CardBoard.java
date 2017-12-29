@@ -1,5 +1,7 @@
 import javafx.util.Pair;
 
+import java.util.Arrays;
+
 public class CardBoard {
     private Card[][] cards = new Card[3][3];
 
@@ -120,5 +122,18 @@ public class CardBoard {
             }
         }
         throw new RuntimeException("CardBoard may be full");
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        for(int i=0; i<cards.length; i++) {
+            for (int j = 0; j < cards[i].length; j++) {
+                sb.append(cards[i][j]);
+                sb.append("|");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }

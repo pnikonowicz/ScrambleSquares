@@ -18,15 +18,13 @@ public class Side {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(value);
+    public String toString() {
+        return String.format("%s%s", value, this.polarity==Polarity.Negative?"-":"+");
     }
 
     @Override
-    public String toString() {
-        return "Side{" +
-                "value='" + value + '\'' +
-                '}';
+    public int hashCode() {
+        return Objects.hash(value);
     }
 
     public boolean matches(Side side) {

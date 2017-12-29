@@ -28,6 +28,15 @@ public class CardBoardTest {
     }
 
     @Test
+    public void getLastAddedCardCoordinatesForEmpty(){
+        CardBoard cardBoard = new CardBoard();
+
+        int result = cardBoard.getLastAddedCardCoordinates().getKey();
+
+        Assertions.assertEquals(-1, result);
+    }
+
+    @Test
     public void placeReturnsAnotherBoard() {
         Card card = new Card(3, Arrays.asList());
         CardBoard cardBoard = new CardBoard();
