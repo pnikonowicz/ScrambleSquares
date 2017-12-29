@@ -6,7 +6,7 @@ public class CardBoard {
     private Card[][] cards = new Card[3][3];
 
     public CardBoard(Card card) {
-        cards = place(card).cards;
+        cards[0][0]=card;
     }
 
     public CardBoard() {
@@ -104,11 +104,12 @@ public class CardBoard {
     }
 
     public boolean areEqual(CardBoard obj) {
-        for (int i = 0; i < cards.length; i++)
+        for (int i = 0; i < cards.length; i++) {
             for (int j = 0; j < cards[i].length; j++) {
-                if (cards[i][j] != obj.cards[i][j])
+                if(obj.cards[i][j]!=null && !obj.cards[i][j].equals(cards[i][j]))
                     return false;
             }
+        }
         return true;
     }
 

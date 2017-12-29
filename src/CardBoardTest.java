@@ -36,7 +36,7 @@ public class CardBoardTest {
 
     @Test
     public void placeReturnsAnotherBoard() {
-        Card card = new Card(3, Arrays.asList());
+        Card card = new Card(3, Arrays.asList(new Side("A", Polarity.Top)));
         CardBoard cardBoard = new CardBoard();
         CardBoard result = cardBoard.place(card);
 
