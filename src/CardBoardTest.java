@@ -3,7 +3,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import java.util.Arrays;
+
 public class CardBoardTest {
+    Side genericSide = new Side("_", Polarity.Negative);
+    Side positiveSide = new Side("X", Polarity.Positive);
+    Side negativeSide = new Side("X", Polarity.Negative);
+
     @Test
     public void placeReturnsAnotherBoard() {
         Card card = new Card(3, Arrays.asList());
@@ -16,24 +22,44 @@ public class CardBoardTest {
     }
 
     @Test
-    public void nextEdgeForFirstRowFirstItem() {
-        Card card = new Card(3, Arrays.asList("1","2","3","4"));
+    public void canPlaceFirstRowFirstItemGood() {
+        Card card = new Card(3, Arrays.asList(genericSide, positiveSide, genericSide, genericSide));
+        Card goodCardToPlace = new Card(3, Arrays.asList(genericSide,genericSide,genericSide,negativeSide));
         CardBoard cardBoard = new CardBoard(card);
 
-        Side result = cardBoard.getNextEdge();
-
-        Assertions.assertEquals(new Side("2"), result);
+        Assertions.assertTrue(cardBoard.canPlace(goodCardToPlace));
     }
 
     @Test
-    public void nextEdgeForFirstRowThirdItem() {
-        Card cardA = new Card(3, Arrays.asList("_","_","X","_"));
-        Card cardB = new Card(5, Arrays.asList("_","_","_","_"));
-        Card cardC = new Card(5, Arrays.asList("_","_","_","_"));
-        CardBoard cardBoard = new CardBoard().place(cardA).place(cardB).place(cardC);
+    public void canPlaceFirstRowFirstItemBad() {
+        Card card = new Card(3, Arrays.asList(genericSide,positiveSide,genericSide,genericSide));
+        Card goodCardToPlace = new Card(3, Arrays.asList(genericSide,genericSide,genericSide,positiveSide));
+        CardBoard cardBoard = new CardBoard(card);
 
-        Side result = cardBoard.getNextEdge();
+        Assertions.assertFalse(cardBoard.canPlace(goodCardToPlace));
+    }
 
-        Assertions.assertEquals(new Side("X"), result);
+    @Test
+    public void canPlaceFirstRowThirdItemGood() {
+        Card cardA = new Card(3, Arrays.asList(genericSide,genericSide,positiveSide,genericSide));
+        Card cardB = new Card(5, Arrays.asList(genericSide,genericSide,genericSide,genericSide));
+        Card cardC = new Card(5, Arrays.asList(genericSide,genericSide,genericSide,genericSide));
+
+        Card goodCardToPlace = new Card(3, Arrays.asList(negativeSide,genericSide,genericSide,genericSide));
+        CardBoard cardBoard = new CardBoard(cardA).place(cardB).place(cardC);
+
+        Assertions.assertTrue(cardBoard.canPlace(goodCardToPlace));
+    }
+
+    @Test
+    public void canPlaceFirstRowThirdItemBad() {
+        Card cardA = new Card(3, Arrays.asList(genericSide,genericSide,genericSide,genericSide));
+        Card cardB = new Card(5, Arrays.asList(genericSide,genericSide,genericSide,genericSide));
+        Card cardC = new Card(5, Arrays.asList(genericSide,genericSide,genericSide,genericSide));
+
+        Card goodCardToPlace = new Card(3, Arrays.asList(genericSide,genericSide,genericSide,genericSide));
+        CardBoard cardBoard = new CardBoard(cardA).place(cardB).place(cardC);
+
+        Assertions.assertFalse(cardBoard.canPlace(goodCardToPlace));
     }
 }

@@ -1,13 +1,12 @@
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Card {
     private final int id;
     private final List<Side> sides;
 
-    public Card(int id, List<String> sides) {
+    public Card(int id, List<Side> sides) {
         this.id = id;
-        this.sides = sides.stream().map(x -> new Side(x)).collect(Collectors.toList());
+        this.sides = sides;
     }
 
     @Override
@@ -26,5 +25,17 @@ public class Card {
 
     public Side getRightSide() {
         return sides.get(1);
+    }
+
+    public Side getBottomSide() {
+        return sides.get(2);
+    }
+
+    public Side getLeftSide() {
+        return sides.get(3);
+    }
+
+    public Side getTopSide() {
+        return sides.get(0);
     }
 }

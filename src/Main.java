@@ -25,15 +25,13 @@ public class Main {
         if (cards.isEmpty() || cardBoard.isFull())
             return cardBoard;
 
-        Card foundCard = cards.find(cardBoard.getNextEdge());
-        if (foundCard == null)
-            return new CardBoard();
-
-        for (Card card : foundCard.rotations()) {
-            if (cardBoard.canPlace(card)) {
-                CardBoard filledCardboard = fillCardBoard(cardBoard.place(card), cards.except(card));
-                if (filledCardboard.isFull())
-                    return filledCardboard;
+        for(Card nextCard : cards) {
+            for (Card rotatingCard : nextCard.rotations()) {
+                if (cardBoard.canPlace(rotatingCard)) {
+                    CardBoard filledCardboard = fillCardBoard(cardBoard.place(rotatingCard), cards.except(rotatingCard));
+                    if (filledCardboard.isFull())
+                        return filledCardboard;
+                }
             }
         }
         return new CardBoard();

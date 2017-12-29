@@ -6,18 +6,6 @@ public class Cards extends ArrayList<Card> {
         return null;
     }
 
-    public Card nextCard() {
-        return null;
-    }
-
-    public Card find(Side nextSide) {
-        return null;
-    }
-
-    public Card find(Card card, Side nextSide) {
-        return null;
-    }
-
     public boolean isEmpty() {
         throw new RuntimeException("TODO");
     }

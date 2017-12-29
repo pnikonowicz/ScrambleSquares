@@ -2,9 +2,11 @@ import java.util.Objects;
 
 public class Side {
     private String value;
+    private Polarity polarity;
 
-    public Side(String value) {
+    public Side(String value, Polarity polarity) {
         this.value = value;
+        this.polarity = polarity;
     }
 
     @Override
@@ -25,5 +27,10 @@ public class Side {
         return "Side{" +
                 "value='" + value + '\'' +
                 '}';
+    }
+
+    public boolean matches(Side side) {
+        Polarity polarity = this.polarity==Polarity.Negative?Polarity.Positive:Polarity.Negative;
+        return side.value==side.value && polarity==side.polarity;
     }
 }

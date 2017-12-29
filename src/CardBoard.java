@@ -23,12 +23,6 @@ public class CardBoard {
         return newBoard;
     }
 
-    public Side getNextEdge() {
-        Pair<Integer, Integer> cardCoordinates = getLastAddedCardCoordinates();
-        Card card = cards[cardCoordinates.getKey()][cardCoordinates.getValue()];
-        return card.getRightSide();
-    }
-
     private Pair<Integer,Integer> getNextEmptyCoordinates() {
         for (int i = 0; i < cards.length; i++) {
             for (int j = 0; j < cards[i].length; j++) {
@@ -47,8 +41,47 @@ public class CardBoard {
         return true;
     }
 
-    public boolean canPlace(Card card) {
-        throw new RuntimeException("TODO");
+    public boolean canPlace(Card cardToPlace) {
+        Pair<Integer, Integer> cardCoordinates = getLastAddedCardCoordinates();
+
+        if (cardCoordinates.getKey()==0) {
+            if(cardCoordinates.getValue()==0) {
+                Card card = cards[cardCoordinates.getKey()][cardCoordinates.getValue()];
+                return card.getRightSide().matches(cardToPlace.getLeftSide());
+            } else if(cardCoordinates.getValue()==1) {
+                return false;
+            } else if(cardCoordinates.getValue()==2) {
+                Card card = cards[0][0];
+                return card.getBottomSide().matches(cardToPlace.getTopSide());
+            } else {
+                throw new RuntimeException("Invalid column");
+            }
+        } else if(cardCoordinates.getKey()==1) {
+            if(cardCoordinates.getValue()==0) {
+                Card cardA = cards[0][1];
+                Card cardB = cards[0][0];
+                return cardA.getBottomSide().matches(cardToPlace.getTopSide())
+                        && cardB.getRightSide().matches(cardA.getLeftSide());
+            } else if(cardCoordinates.getValue()==1) {
+                throw new RuntimeException("TODO");
+            } else if(cardCoordinates.getValue()==2) {
+                throw new RuntimeException("TODO");
+            } else {
+                throw new RuntimeException("Invalid column");
+            }
+        } else if(cardCoordinates.getKey()==2) {
+            if(cardCoordinates.getValue()==0) {
+                throw new RuntimeException("TODO");
+            } else if(cardCoordinates.getValue()==1) {
+                throw new RuntimeException("TODO");
+            } else if(cardCoordinates.getValue()==2) {
+                throw new RuntimeException("TODO");
+            } else {
+                throw new RuntimeException("Invalid column");
+            }
+        } else {
+            throw new RuntimeException("unsupported row");
+        }
     }
 
     public boolean areEqual(CardBoard obj) {
