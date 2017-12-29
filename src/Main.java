@@ -13,12 +13,18 @@ public class Main {
     }
 
     public static CardBoard fillCardBoard(CardBoard cardBoard, Cards cards) {
+
+
         for(Card nextCard : cards) {
             for (Card rotatingCard : nextCard.rotations()) {
                 if (cardBoard.canPlace(rotatingCard)) {
                     CardBoard filledCardboard = fillCardBoard(cardBoard.place(rotatingCard), cards.except(rotatingCard));
-                    if (filledCardboard.isFull())
+                    if (filledCardboard.isFull()) {
                         return filledCardboard;
+                    }
+                    else {
+                    }
+                } else {
                 }
             }
         }

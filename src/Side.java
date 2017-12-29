@@ -19,7 +19,7 @@ public class Side {
 
     @Override
     public String toString() {
-        return String.format("%s%s", value, this.polarity==Polarity.Negative?"-":"+");
+        return String.format("%s%s", value, this.polarity==Polarity.Top ?"TOP":"BOTTOM");
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Side {
     }
 
     public boolean matches(Side side) {
-        Polarity polarity = this.polarity==Polarity.Negative?Polarity.Positive:Polarity.Negative;
-        return side.value==side.value && polarity==side.polarity;
+        Polarity targetPolarity = this.polarity==Polarity.Top ?Polarity.Bottom :Polarity.Top;
+        return side.value.equals(value) && targetPolarity==side.polarity;
     }
 }

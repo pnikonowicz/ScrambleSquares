@@ -1,4 +1,4 @@
 public enum Polarity {
-    Positive,
-    Negative,
+    Bottom,
+    Top,
 }

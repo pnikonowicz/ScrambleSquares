@@ -16,12 +16,16 @@ public class CardBoard {
         CardBoard newBoard = new CardBoard();
         for (int i = 0; i < cards.length; i++) {
             for (int j = 0; j < cards[i].length; j++) {
-                newBoard.cards[i][j] = cards[i][j];
+                if(cards[i][j]!=null) {
+                    newBoard.cards[i][j] = new Card(cards[i][j].getId(), cards[i][j].getSides());
+                } else {
+                    cards[i][j] = null;
+                }
             }
         }
 
         Pair<Integer, Integer> next = getNextEmptyCoordinates();
-        newBoard.cards[next.getKey()][next.getValue()] = card;
+        newBoard.cards[next.getKey()][next.getValue()] = new Card(card.getId(), card.getSides());
         return newBoard;
     }
 
@@ -64,14 +68,14 @@ public class CardBoard {
         } else if(cardCoordinates.getKey()==1) {
             if(cardCoordinates.getValue()==0) {
                 Card cardA = cards[0][1];
-                Card cardB = cards[0][0];
+                Card cardB = cards[1][0];
                 return cardA.getBottomSide().matches(cardToPlace.getTopSide())
-                        && cardB.getRightSide().matches(cardA.getLeftSide());
+                        && cardB.getRightSide().matches(cardToPlace.getLeftSide());
             } else if(cardCoordinates.getValue()==1) {
                 Card cardA = cards[0][2];
-                Card cardB = cards[0][1];
+                Card cardB = cards[1][1];
                 return cardA.getBottomSide().matches(cardToPlace.getTopSide())
-                        && cardB.getRightSide().matches(cardA.getLeftSide());
+                        && cardB.getRightSide().matches(cardToPlace.getLeftSide());
             } else if(cardCoordinates.getValue()==2) {
                 Card card = cards[1][0];
                 return card.getBottomSide().matches(cardToPlace.getTopSide());
@@ -81,14 +85,14 @@ public class CardBoard {
         } else if(cardCoordinates.getKey()==2) {
             if(cardCoordinates.getValue()==0) {
                 Card cardA = cards[1][1];
-                Card cardB = cards[1][0];
+                Card cardB = cards[2][0];
                 return cardA.getBottomSide().matches(cardToPlace.getTopSide())
-                        && cardB.getRightSide().matches(cardA.getLeftSide());
+                        && cardB.getRightSide().matches(cardToPlace.getLeftSide());
             } else if(cardCoordinates.getValue()==1) {
                 Card cardA = cards[1][2];
-                Card cardB = cards[1][1];
+                Card cardB = cards[2][1];
                 return cardA.getBottomSide().matches(cardToPlace.getTopSide())
-                        && cardB.getRightSide().matches(cardA.getLeftSide());
+                        && cardB.getRightSide().matches(cardToPlace.getLeftSide());
             } else if(cardCoordinates.getValue()==2) {
                 throw new RuntimeException("board is full");
             } else {
@@ -122,6 +126,17 @@ public class CardBoard {
             }
         }
         throw new RuntimeException("CardBoard may be full");
+    }
+
+    public int size() {
+        int count =0;
+        for (int i = 0; i < cards.length; i++) {
+            for (int j = 0; j < cards[i].length; j++) {
+                if(cards[i][j]!=null)
+                    count++;
+            }
+        }
+        return count;
     }
 
     @Override

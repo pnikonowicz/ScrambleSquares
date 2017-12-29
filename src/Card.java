@@ -25,7 +25,11 @@ public class Card {
     }
 
     public Card[] rotations() {
-        return new Card[]{rotate(), rotate(), rotate(), rotate()};
+        Card a = rotate();
+        Card b = a.rotate();
+        Card c = b.rotate();
+        Card d = c.rotate();
+        return new Card[]{d,a,b,c};
     }
 
     public Side getRightSide() {
@@ -60,5 +64,9 @@ public class Card {
     @Override
     public int hashCode() {
         return Objects.hash(id, sides);
+    }
+
+    public List<Side> getSides() {
+        return sides;
     }
 }

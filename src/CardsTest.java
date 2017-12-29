@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class CardsTest {
     @Test
     public void except() {
-        Side side = new Side("_", Polarity.Negative);
+        Side side = new Side("_", Polarity.Top);
         Card cardA = new Card(1, Arrays.asList(side,side,side,side));
         Card cardB = new Card(2, Arrays.asList(side,side,side,side));
         Cards cards = new Cards();

@@ -3,12 +3,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import java.util.Arrays;
-
 public class CardBoardTest {
-    Side genericSide = new Side("_", Polarity.Negative);
-    Side positiveSide = new Side("X", Polarity.Positive);
-    Side negativeSide = new Side("X", Polarity.Negative);
+    Side genericSide = new Side("_", Polarity.Top);
+    Side positiveSide = new Side("X", Polarity.Bottom);
+    Side negativeSide = new Side("X", Polarity.Top);
 
     @Test
     public void isFull() {
