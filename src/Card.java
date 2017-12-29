@@ -1,12 +1,13 @@
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Card {
     private final int id;
-    private final List<String> sides;
+    private final List<Side> sides;
 
     public Card(int id, List<String> sides) {
         this.id = id;
-        this.sides = sides;
+        this.sides = sides.stream().map(x -> new Side(x)).collect(Collectors.toList());
     }
 
     @Override
@@ -21,5 +22,9 @@ public class Card {
 
     public Card[] rotations() {
         return new Card[]{rotate(), rotate(), rotate(), rotate()};
+    }
+
+    public Side getRightSide() {
+        return sides.get(1);
     }
 }

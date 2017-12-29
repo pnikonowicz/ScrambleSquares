@@ -10,11 +10,11 @@ public class Cards extends ArrayList<Card> {
         return null;
     }
 
-    public Card find(Edge nextEdge) {
+    public Card find(Side nextSide) {
         return null;
     }
 
-    public Card find(Card card, Edge nextEdge) {
+    public Card find(Card card, Side nextSide) {
         return null;
     }
 
