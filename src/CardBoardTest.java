@@ -11,6 +11,23 @@ public class CardBoardTest {
     Side negativeSide = new Side("X", Polarity.Negative);
 
     @Test
+    public void isFull() {
+        Card card = new Card(3, Arrays.asList(genericSide,genericSide,genericSide,genericSide));
+
+        CardBoard cardBoard = new CardBoard(card)
+                .place(card)
+                .place(card)
+                .place(card)
+                .place(card)
+                .place(card)
+                .place(card)
+                .place(card);
+
+        Assertions.assertFalse(cardBoard.isFull());
+        Assertions.assertTrue(cardBoard.place(card).isFull());
+    }
+
+    @Test
     public void placeReturnsAnotherBoard() {
         Card card = new Card(3, Arrays.asList());
         CardBoard cardBoard = new CardBoard();

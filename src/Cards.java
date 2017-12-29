@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Cards extends ArrayList<Card> {
 
@@ -6,11 +7,7 @@ public class Cards extends ArrayList<Card> {
         return null;
     }
 
-    public boolean isEmpty() {
-        throw new RuntimeException("TODO");
-    }
-
     public Cards except(Card card) {
-        return null;
+        return this.stream().filter(x -> x.getId() != card.getId()).collect(Collectors.toCollection(Cards::new));
     }
 }
